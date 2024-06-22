@@ -92,15 +92,25 @@ fun MyAppSuiteScaffoldLayout() {
                     // Adding Spacers before and after the item so they are pushed towards the
                     // center of the NavigationRail.
                     Spacer(Modifier.weight(1f))
-                    AppDestinations.entries.forEachIndexed { index, item ->
+                    AppDestinations.entries.forEach { item ->
                         NavigationRailItem(
                             icon = {
                                 Icon(
                                     item.icon,
-                                    contentDescription = stringResource(item.contentDescription)
+                                    contentDescription = stringResource(item.contentDescription),
+                                    tint =
+                                        if (item == currentDestination) MaterialTheme.colorScheme.onPrimaryContainer
+                                        else MaterialTheme.colorScheme.primaryContainer
                                 )
                             },
-                            label = { Text(stringResource(item.label)) },
+                            label = {
+                                Text(
+                                    text = stringResource(item.label),
+                                    color =
+                                    if(item == currentDestination) MaterialTheme.colorScheme.onPrimaryContainer
+                                    else MaterialTheme.colorScheme.primaryContainer
+                                )
+                            },
                             selected = item == currentDestination,
                             onClick = { currentDestination = item },
                             colors = myNavigationSuiteRailItemColors,
@@ -137,6 +147,7 @@ fun MyAppSuiteScaffoldLayout() {
             AppDestinations.FAVORITES -> FavoritesScreen()
             AppDestinations.SHOPPING -> ShoppingScreen()
             AppDestinations.PROFILE -> ProfileScreen()
+            AppDestinations.INTERESTS -> MyAppListDetailScaffold()
         }
     }
 

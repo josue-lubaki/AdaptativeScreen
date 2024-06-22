@@ -38,7 +38,6 @@ fun MyAppSuiteScaffold() {
         ),
     )
 
-    // custom colors for the navigation items.
     // custom colors for the navigation suite, depending on the layout type.
     val navigationSuiteBarColors = NavigationSuiteDefaults.colors(
         navigationDrawerContainerColor = MaterialTheme.colorScheme.background.copy(alpha = 0.3f),
@@ -71,10 +70,20 @@ fun MyAppSuiteScaffold() {
                     icon = {
                         Icon(
                             it.icon,
-                            contentDescription = stringResource(it.contentDescription)
+                            contentDescription = stringResource(it.contentDescription),
+                            tint =
+                                if (it == currentDestination) MaterialTheme.colorScheme.onPrimaryContainer
+                                else MaterialTheme.colorScheme.primaryContainer
                         )
                     },
-                    label = { Text(stringResource(it.label)) },
+                    label = {
+                        Text(
+                            text = stringResource(it.label),
+                            color =
+                                if(it == currentDestination) MaterialTheme.colorScheme.onPrimaryContainer
+                                else MaterialTheme.colorScheme.primaryContainer
+                        )
+                    },
                     selected = it == currentDestination,
                     onClick = { currentDestination = it },
                     colors = myNavigationSuiteItemColors,
@@ -92,6 +101,7 @@ fun MyAppSuiteScaffold() {
             AppDestinations.FAVORITES -> FavoritesScreen()
             AppDestinations.SHOPPING -> ShoppingScreen()
             AppDestinations.PROFILE -> ProfileScreen()
+            AppDestinations.INTERESTS -> MyAppListDetailScaffold()
         }
     }
 }

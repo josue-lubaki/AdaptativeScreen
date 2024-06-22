@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import ca.josue_lubaki.adaptivelayoutpoc.screens_config.MyAppSuiteScaffold
 import ca.josue_lubaki.adaptivelayoutpoc.screens_config.MyAppSuiteScaffoldLayout
 import ca.josue_lubaki.adaptivelayoutpoc.ui.theme.AdaptiveLayoutPocTheme
 
@@ -14,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AdaptiveLayoutPocTheme {
-                MyAppSuiteScaffold()
+                MyAppSuiteScaffoldLayout()
             }
         }
     }
