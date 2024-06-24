@@ -1,4 +1,4 @@
-package ca.josue_lubaki.adaptivelayoutpoc.screens_config
+package ca.josue_lubaki.adaptivelayoutpoc.screens_config.content_config
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -12,8 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.layout.AnimatedPane
-import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
+import androidx.compose.material3.adaptive.layout.SupportingPaneScaffold
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -32,7 +32,7 @@ import ca.josue_lubaki.adaptivelayoutpoc.ui.theme.AdaptiveLayoutPocTheme
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
-fun MyAppListDetailScaffold() {
+fun MyListExtraScaffold() {
     val navigator = rememberListDetailPaneScaffoldNavigator<TAB>()
 
     BackHandler(navigator.canNavigateBack()) {
@@ -43,11 +43,11 @@ fun MyAppListDetailScaffold() {
         mutableStateOf(Subjects.ACCESSIBILITY)
     }
 
-    ListDetailPaneScaffold(
+    SupportingPaneScaffold(
         directive = navigator.scaffoldDirective,
         value = navigator.scaffoldValue,
         modifier = Modifier.background(MaterialTheme.colorScheme.primaryContainer),
-        listPane = {
+        mainPane = {
             AnimatedPane {
                 MyList(
                     selectedSubject = selectedSubject.value,
@@ -59,7 +59,7 @@ fun MyAppListDetailScaffold() {
                 )
             }
         },
-        detailPane = {
+        supportingPane = {
             AnimatedPane {
                 // Show the detail pane content if selected item is available
                 navigator.currentDestination?.content?.let { tab ->
@@ -71,7 +71,7 @@ fun MyAppListDetailScaffold() {
 }
 
 @Composable
-fun MyDetails(tab: TAB) {
+private fun MyDetails(tab: TAB) {
 
     val currentTab = tab.value
 
@@ -84,7 +84,7 @@ fun MyDetails(tab: TAB) {
 }
 
 @Composable
-fun MyList(
+private fun MyList(
     selectedSubject: Subjects,
     onItemClick: (TAB) -> Unit
 ) {
@@ -143,8 +143,8 @@ fun MyList(
 
 @Preview(showBackground = true)
 @Composable
-fun MyAppListDetailScaffoldPreview() {
+private fun MyAppListExtraScaffoldPreview() {
     AdaptiveLayoutPocTheme {
-        MyAppListDetailScaffold()
+        MyListDetailScaffold()
     }
 }

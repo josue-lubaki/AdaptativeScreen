@@ -24,16 +24,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.window.core.layout.WindowWidthSizeClass
+import ca.josue_lubaki.adaptivelayoutpoc.navigation.AppDestinations
 import ca.josue_lubaki.adaptivelayoutpoc.screens.FavoritesScreen
 import ca.josue_lubaki.adaptivelayoutpoc.screens.HomeScreen
 import ca.josue_lubaki.adaptivelayoutpoc.screens.ProfileScreen
 import ca.josue_lubaki.adaptivelayoutpoc.screens.ShoppingScreen
-import ca.josue_lubaki.adaptivelayoutpoc.navigation.AppDestinations
+import ca.josue_lubaki.adaptivelayoutpoc.screens_config.content_config.MyListDetailScaffold
+import ca.josue_lubaki.adaptivelayoutpoc.screens_config.content_config.MyListExtraScaffold
 import ca.josue_lubaki.adaptivelayoutpoc.ui.theme.AdaptiveLayoutPocTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MyAppSuiteScaffoldLayout() {
+fun MySuiteScaffoldLayout() {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
 
     // custom colors for the navigation bar items.
@@ -147,7 +149,12 @@ fun MyAppSuiteScaffoldLayout() {
             AppDestinations.FAVORITES -> FavoritesScreen()
             AppDestinations.SHOPPING -> ShoppingScreen()
             AppDestinations.PROFILE -> ProfileScreen()
-            AppDestinations.INTERESTS -> MyAppListDetailScaffold()
+
+            /*** use the list & detail scaffold for the interests destination. ***/
+            AppDestinations.INTERESTS -> MyListDetailScaffold()
+
+            /*** use the extra scaffold for the interests destination. ***/
+//            AppDestinations.INTERESTS -> MyListExtraScaffold()
         }
     }
 
@@ -155,8 +162,8 @@ fun MyAppSuiteScaffoldLayout() {
 
 @Preview(showBackground = true)
 @Composable
-fun MyAppRailPreview() {
+private fun MyAppRailPreview() {
     AdaptiveLayoutPocTheme {
-        MyAppSuiteScaffoldLayout()
+        MySuiteScaffoldLayout()
     }
 }
